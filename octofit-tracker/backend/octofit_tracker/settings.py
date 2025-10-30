@@ -53,7 +53,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'corsheaders.middleware.CorsMiddleware',
 ]
-ALLOWED_HOSTS = ['*']
+import os
+codespace_name = os.environ.get('CODESPACE_NAME', None)
+allowed_hosts = ['localhost', '127.0.0.1']
+if codespace_name:
+    allowed_hosts.append(f'{codespace_name}-8000.app.github.dev')
+ALLOWED_HOSTS = allowed_hosts
 
 ROOT_URLCONF = 'octofit_tracker.urls'
 
